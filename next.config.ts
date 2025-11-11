@@ -5,7 +5,10 @@ const nextConfig: NextConfig = {
   reactStrictMode: true,
   output: "export",
   basePath: "/PokePredict",
-  assetPrefix: "/PokePredict/"
+  assetPrefix: "/PokePredict/",
+  images: {
+    unoptimized: true,
+  },
 };
 
 export default nextConfig;
