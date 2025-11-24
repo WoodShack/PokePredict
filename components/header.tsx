@@ -45,8 +45,8 @@ function PokedexTab({ label, href }) {
         transition active:scale-95
         hover:bg-yellow-400
         rounded-lg
-        before:content-[''] before:absolute before:-left-2 before:top-0 before:w-2 before:h-full before:bg-yellow-300 before:border-l-2 before:border-t-2 before:border-b-2 before:border-black before:rounded-l-md
-        after:content-[''] after:absolute after:-right-2 after:top-0 after:w-2 after:h-full after:bg-yellow-300 after:border-r-2 after:border-t-2 after:border-b-2 after:border-black after:rounded-r-md
+        before:content-[''] before:-left-2 before:top-0 before:w-2 before:h-full before:bg-yellow-300 before:border-t-2 before:border-b-2 before:border-black before:rounded-l-md
+        after:content-[''] after:-right-2 after:top-0 after:w-2 after:h-full after:bg-yellow-300 after:border-t-2 after:border-b-2 after:border-black after:rounded-r-md
       "
     >
       {label}
