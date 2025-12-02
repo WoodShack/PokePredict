@@ -114,7 +114,7 @@ export default function CharacterCreation() {
             <input
               type="radio"
               name="avatar"
-              value="4"
+              value="3"
               required
               className="mb-2"
             />

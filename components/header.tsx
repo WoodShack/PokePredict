@@ -24,7 +24,6 @@ export default function Header() {
         <PokedexTab label="Home" href="/" />
         <PokedexTab label="Character Creation" href="/characterCreation" />
         <PokedexTab label="Encounter" href="/encounter" />
-        <PokedexTab label="Trivia" href="/trivia" />
       </nav>
     </header>
   );
