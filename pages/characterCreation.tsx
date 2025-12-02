@@ -1,8 +1,11 @@
 import Header from "../components/header";
 import { useState } from "react";
+import { useRouter } from "next/router";
+import { saveCharacter } from "../components/localstorage";
 
 export default function CharacterCreation() {
   const [name, setName] = useState("");
+  const router = useRouter();
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -11,9 +14,9 @@ export default function CharacterCreation() {
     )?.value;
 
     if (name && selectedAvatar) {
-      localStorage.setItem("playerName", name);
-      localStorage.setItem("playerAvatar", selectedAvatar);
-      alert("Character saved!");
+      const avatarNum = parseInt(selectedAvatar) as 1 | 2 | 3;
+      saveCharacter({ name, imageId: avatarNum });
+      router.push("/encounter");
     }
   };
 
@@ -65,7 +68,7 @@ export default function CharacterCreation() {
             <input
               type="radio"
               name="avatar"
-              value="/avatar1.png"
+              value="1"
               required
               className="mb-2"
             />
@@ -88,7 +91,7 @@ export default function CharacterCreation() {
             <input
               type="radio"
               name="avatar"
-              value="/avatar2.png"
+              value="2"
               required
               className="mb-2"
             />
@@ -111,7 +114,7 @@ export default function CharacterCreation() {
             <input
               type="radio"
               name="avatar"
-              value="/avatar3.png"
+              value="4"
               required
               className="mb-2"
             />
