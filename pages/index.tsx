@@ -27,7 +27,7 @@ export default function Home() {
 
         <div className="mt-12">
           <p className="text-lg font-semibold text-black">
-            Step 1: Create your character to start your adventure. Enter your
+            Create your character to start your adventure. Enter your
             trainer name and choose an avatar to personalize your journey!
           </p>
 
@@ -42,28 +42,6 @@ export default function Home() {
               "
             >
               Create Character
-            </button>
-          </a>
-        </div>
-
-        <div className="mt-16">
-          <p className="text-lg font-semibold text-black">
-            Step 2: Play games to test your skills! Try the Encounter game to
-            battle wild Pokémon, and later challenge yourself with the Trivia
-            game!
-          </p>
-
-          <a href="/encounter">
-            <button
-              className="
-                px-6 py-3 mt-6
-                bg-red-400 border-2 border-black rounded-xl 
-                shadow-[4px_4px_0_#000]
-                font-bold text-black text-lg
-                hover:bg-red-500 active:scale-95 transition
-              "
-            >
-              Start Encounter Game
             </button>
           </a>
         </div>
