@@ -3,6 +3,7 @@ import PokemonCard from "./pokemon";
 import type { Pokemon } from "./pokeapi";
 import { getTwoRandomPokemon } from "./pokeapi";
 import styles from "../styles/encounter.module.css";
+import { get } from "http";
 
 export default function Encounter() {
   const [pokemons, setPokemons] = useState<[Pokemon | null, Pokemon | null]>([
