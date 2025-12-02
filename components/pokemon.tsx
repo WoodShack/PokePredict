@@ -3,9 +3,10 @@ import styles from "../styles/pokemon.module.css";
 
 type Props = {
   pokemon: Pokemon;
+  onSelect: (id: number) => void;
 };
 
-export default function PokemonCard({ pokemon }: Props) {
+export default function PokemonCard({ pokemon, onSelect }: Props) {
   const img = pokemon.sprites?.front_default ?? "";
   const displayName = pokemon.name
     ? pokemon.name.replace(/-/g, " ")
@@ -21,13 +22,23 @@ export default function PokemonCard({ pokemon }: Props) {
 
       <h3 className={styles.name}>{displayName}</h3>
 
-      <div className={styles.stats}>
-        HP: {pokemon.hp} • ATK: {pokemon.attack} • DEF: {pokemon.defense}
-      </div>
-
-      <div className={styles.meta}>
-        Height: {pokemon.height} • Weight: {pokemon.weight}
-      </div>
+      <button
+        type="button"
+        onClick={() => onSelect(pokemon.id)}
+        className="
+          relative 
+          px-5 py-2 
+          font-bold 
+          text-black 
+          bg-yellow-300 
+          border-2 border-black 
+          shadow-[3px_3px_0_#000]
+          transition active:scale-95
+          hover:bg-yellow-400
+          rounded-lg"
+      >
+        Select
+      </button>
     </div>
   );
 }
