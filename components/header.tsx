@@ -23,7 +23,6 @@ export default function Header() {
       <nav className="flex gap-4">
         <PokedexTab label="Home" href="/" />
         <PokedexTab label="Character Creation" href="/characterCreation" />
-        <PokedexTab label="Encounter" href="/encounter" />
       </nav>
     </header>
   );
