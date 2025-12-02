@@ -1,3 +1,5 @@
+let allPokemon: { name: string; url: string }[] = [];
+
 export type Pokemon = {
     id: number
     name: string
@@ -13,16 +15,28 @@ export type Pokemon = {
     [key: string]: any
 }
 
-// Returns a random pokemon ID
-function getRandomPokemonId(): number {
-    const highestPokemonID = 1327;
-    return Math.floor(Math.random() * highestPokemonID) + 1
+async function loadAllPokemon() {
+  if (allPokemon.length > 0) return allPokemon; // already loaded
+
+  const res = await fetch("https://pokeapi.co/api/v2/pokemon?limit=2000");
+  const data = await res.json();
+
+  allPokemon = data.results; // save results
+  return allPokemon;
+}
+
+// Returns a random pokemon URL
+async function getRandomPokemonURL(): Promise<string> {
+    await loadAllPokemon(); // Ensure allPokemon is loaded
+    const randomIndex = Math.floor(Math.random() * allPokemon.length);
+    return allPokemon[randomIndex].url;
 }
 
 // Fetch data for a pokemon using its ID
-async function fetchPokemonById(id: number): Promise<Pokemon> {
-    const res = await fetch(`https://pokeapi.co/api/v2/pokemon/${id}`)
-    if (!res.ok) throw new Error(`Failed to fetch Pokémon ${id}: ${res.status}`)
+async function fetchPokemon(url: string): Promise<Pokemon> {
+    console.log(url)
+    const res = await fetch(url);
+    if (!res.ok) throw new Error(`Failed to fetch Pokémon ${url}: ${res.status}`)
     const json = await res.json()
 
     const statMap: Record<string, number> = {}
@@ -49,31 +63,42 @@ async function fetchPokemonById(id: number): Promise<Pokemon> {
 
 // Get two random pokemon
 export async function getTwoRandomPokemon(): Promise<[Pokemon, Pokemon]> {
-    let pokemon1 = null;
-    let pokemon2 = null;
+    let pokemon1: Pokemon | null = null;
+    let pokemon2: Pokemon | null = null;
 
-    //Get a valid first pokemon
-    while(pokemon1 === null){
-        try{
-            pokemon1 = await fetchPokemonById(getRandomPokemonId());
-        } catch(err){
+    // Get a valid first pokemon with a sprite
+    while (pokemon1 === null) {
+        try {
+            let pokemon1URL = await getRandomPokemonURL();
+            const candidate = await fetchPokemon(pokemon1URL);
 
+            // Make sure it has an image
+            if (candidate.sprites?.front_default != null) {
+                pokemon1 = candidate;
+            }
+        } catch (err) {
+            console.log("Error fetching pokemon 1, retrying...");
         }
     }
 
-    //Get a valid second pokemon that is different from the first
-    while(pokemon2 === null){
-        let pokemon2ID = getRandomPokemonId();
-        while(pokemon2ID === pokemon1.id){
-            pokemon2ID = getRandomPokemonId();
+    // Get a valid second pokemon that is different from the first and has a sprite
+    while (pokemon2 === null) {
+        let pokemon2URL = await getRandomPokemonURL();
+        while (pokemon2URL === "https://pokeapi.co/api/v2/pokemon/" + pokemon1.id + "/") {
+            pokemon2URL = await getRandomPokemonURL();
         }
 
-        try{
-            pokemon2 = await fetchPokemonById(pokemon2ID);
-        } catch(err){
-
+        try {
+            const candidate = await fetchPokemon(pokemon2URL);
+            
+            // Make sure it has an image
+            if (candidate.sprites?.front_default != null) {
+                pokemon2 = candidate;
+            }
+        } catch (err) {
+            console.log("Error fetching pokemon 2, retrying...");
         }
     }
 
-    return [pokemon1, pokemon2]
+    return [pokemon1, pokemon2];
 }
