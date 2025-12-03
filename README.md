@@ -1,40 +1,42 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/pages/api-reference/create-next-app).
+# PokePredict EX
 
-## Getting Started
+## 🎮 Project Description
 
-First, run the development server:
+PokePredict EX is an interactive Pokémon-themed browser game designed to make short periods of downtime more fun and engaging. Whether you're waiting for the bus, on a break, or just have a few minutes to spare, this game provides a free, ad‑free, and download‑free way to pass the time.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+In the game, you take on the role of a Pokémon trainer walking through tall grass. During an **“encounter,”** two random Pokémon appear, and you must answer questions comparing their stats:
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+- Which Pokémon is taller?
+- Which Pokémon weighs more?
+- Which Pokémon has higher attack power?
+- Which Pokémon has higher defence?
+- Which Pokémon has more health?
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+You start with **5 health points**. Each incorrect answer costs 1 health point, while each correct answer increases your score by 1. The goal is to achieve the highest score possible and compete with friends. Your trainer’s name, chosen character image, and high scores are saved locally on your device—no account or installation required.
 
-[API routes](https://nextjs.org/docs/pages/building-your-application/routing/api-routes) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
+## 📁 Component Overview
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/pages/building-your-application/routing/api-routes) instead of React pages.
+### `header.tsx` – Navigation Header
+The top navigation bar of the website. Displays the logo, a Pokéball icon, and two styled tabs (“Home” and “Character Creation”) that look like buttons from a Pokédex.
 
-This project uses [`next/font`](https://nextjs.org/docs/pages/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### `pokemon.tsx` – Pokémon Display Card
+Shows a single Pokémon with its image and name. Includes a “Select” button that allows the player to choose that Pokémon during an encounter.
 
-## Learn More
+### `localstorage.ts` – Save Data Manager
+Handles saving and loading game data in the browser’s local storage. Manages the player’s character (name and image choice) and high scores (name, score, date).
 
-To learn more about Next.js, take a look at the following resources:
+### `pokeapi.ts` – Pokémon Data Fetcher
+Fetches random Pokémon data from the official Pokémon API. Retrieves stats (height, weight, attack, defense, HP) and images, ensuring each encounter shows two distinct, valid Pokémon.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn-pages-router) - an interactive Next.js tutorial.
+### `encounter.tsx` – Game Screen
+The main gameplay screen. Displays two random Pokémon, a random comparison question, and processes the player’s selection, providing feedback and loading new encounters.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+### `characterCreation.tsx` – Character Setup Page
+A page that combines the header with the character creation form, allowing players to name their trainer and select a character image before playing.
 
-## Deploy on Vercel
+## 🚀 Getting Started
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/pages/building-your-application/deploying) for more details.
+1. Clone the repository
+2. Install dependencies:
+   ```bash
+   npm install
