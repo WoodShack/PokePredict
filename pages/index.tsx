@@ -1,15 +1,35 @@
 import Header from "../components/header";
 import { useState, useEffect } from "react";
+import { getCharacter, getHighScores } from "../components/localstorage";
 
 export default function Home() {
   const [name, setName] = useState("");
   const [avatar, setAvatar] = useState("");
+  const [lastScore, setLastScore] = useState<number | null>(null);
 
   useEffect(() => {
-    const savedName = localStorage.getItem("playerName");
-    const savedAvatar = localStorage.getItem("playerAvatar");
-    if (savedName) setName(savedName);
-    if (savedAvatar) setAvatar(savedAvatar);
+    const saved = getCharacter();
+    if (!saved) return;
+
+    setName(saved.name);
+
+    const avatarMap: Record<number, string> = {
+      1: "/avatar1.png",
+      2: "/avatar2.png",
+      3: "/avatar3.png",
+    };
+
+    setAvatar(avatarMap[saved.imageId]);
+
+    // Get the last/highest score for this character
+    const scores = getHighScores();
+    const charScores = scores
+      .filter((s) => s.name === saved.name)
+      .sort((a, b) => b.score - a.score);
+
+    if (charScores.length > 0) {
+      setLastScore(charScores[0].score);
+    }
   }, []);
 
   return (
@@ -27,8 +47,8 @@ export default function Home() {
 
         <div className="mt-12">
           <p className="text-lg font-semibold text-black">
-            Create your character to start your adventure. Enter your
-            trainer name and choose an avatar to personalize your journey!
+            Create your character to start your adventure. Enter your trainer
+            name and choose an avatar to personalize your journey!
           </p>
 
           <a href="/characterCreation">
@@ -60,8 +80,14 @@ export default function Home() {
               <img
                 src={avatar}
                 alt="Trainer Avatar"
-                className="mx-auto mt-6 w-40 h-40 rounded-xl border-4 border-black shadow-[4px_4px_0_#000]"
+                className="mx-auto mt-6 w-40 h-40 rounded-xl border-4 border-black"
               />
+            )}
+
+            {lastScore !== null && (
+              <p className="mt-4 text-lg font-bold text-green-700">
+                Last Score: {lastScore}
+              </p>
             )}
           </div>
         )}
