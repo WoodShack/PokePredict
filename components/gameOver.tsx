@@ -6,23 +6,26 @@ type GameOverProps = {
 
 export default function GameOver({ onRestart }: GameOverProps) {
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-70 flex flex-col items-center justify-center z-50 p-4">
-      <div className="bg-yellow-500 border-4 border-black rounded-2xl p-6 text-center max-w-lg w-full">
-        <h2 className="text-4xl font-extrabold text-red-600 mb-4 tracking-wider">
+    <div className="fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center z-50 p-4">
+      <div className="bg-yellow-500 border-4 border-black rounded-3xl p-8 text-center max-w-lg w-full shadow-2xl">
+        <h2 className="text-5xl font-extrabold text-red-600 mb-6 drop-shadow-[2px_2px_0px_black] tracking-wide">
           GAME OVER!
         </h2>
 
-        <div className="mb-6">
+        <div className="w-24 h-1 bg-black mx-auto mb-6 rounded-full"></div>
+
+        <div className="mb-8">
+          <h3 className="text-xl font-bold text-black mb-3 underline">
+            High Scores
+          </h3>
           <HighScores />
         </div>
 
         <button
-          className="
-            px-6 py-3 bg-red-500 border-2 border-black rounded-xl 
-            font-bold text-black text-lg
-            hover:bg-red-600 active:scale-95 transition
-          "
           onClick={onRestart}
+          className="px-7 py-3 bg-red-500 border-2 border-black rounded-xl 
+                     font-bold text-black text-lg shadow-[3px_3px_0px_black]
+                     hover:bg-red-600 active:scale-95 active:shadow-none transition-all"
         >
           Restart Game
         </button>

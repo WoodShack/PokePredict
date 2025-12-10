@@ -7,6 +7,15 @@ import type { Character } from "./localstorage";
 import Lives from "./lives";
 import GameOver from "./gameOver";
 
+const correctSound =
+  typeof Audio !== "undefined" ? new Audio("/sounds/correct.mp3.wav") : null;
+
+const wrongSound =
+  typeof Audio !== "undefined" ? new Audio("/sounds/wrong.mp3.wav") : null;
+
+const gameOverSound =
+  typeof Audio !== "undefined" ? new Audio("/sounds/gameover.mp3.wav") : null;
+
 const questions: {
   text: string;
   attribute: "height" | "weight" | "attack" | "defense" | "hp";
@@ -58,11 +67,13 @@ export default function Encounter() {
     const correct = selectedVal > otherVal;
 
     if (correct) {
+      correctSound?.play();
       setScore((prev) => prev + 1);
       alert(
         `Correct! ${selected.name} has ${attr} of ${selectedVal}, while ${other.name} has ${attr} of ${otherVal}.`
       );
     } else {
+      wrongSound?.play();
       setLives((prev) => Math.max(prev - 1, 0));
       alert(
         `Wrong! ${selected.name} has ${attr} of ${selectedVal}, while ${other.name} has ${attr} of ${otherVal}.`
@@ -100,6 +111,7 @@ export default function Encounter() {
 
   useEffect(() => {
     if (lives === 0 && character && !scoreSaved) {
+      gameOverSound?.play();
       addHighScore(character, score);
       setScoreSaved(true);
     }
