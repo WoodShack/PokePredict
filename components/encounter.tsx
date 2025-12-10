@@ -5,6 +5,7 @@ import { getTwoRandomPokemon } from "./pokeapi";
 import { getCharacter, addHighScore } from "./localstorage";
 import type { Character } from "./localstorage";
 import Lives from "./lives";
+import HighScores from "../components/highScore";
 import GameOver from "./gameOver";
 
 const correctSound =
@@ -123,6 +124,31 @@ export default function Encounter() {
         Pokemon Encounter
       </h1>
 
+      {character && (
+        <div className="flex justify-center mt-4 mb-6">
+          <div
+            className="
+        bg-white border-4 border-black
+        rounded-xl px-6 py-4
+        flex flex-col items-center gap-3
+      "
+          >
+            
+            <Lives lives={lives} />
+
+            <div className="text-sm text-black font-bold bg-yellow-200 border-2 border-black px-4 py-1 rounded">
+              SCORE: {score}
+            </div>
+
+            <img
+              src={getAvatarSrc(character.imageId)}
+              alt="Player Avatar"
+              className="w-20 h-20 border-4 border-black bg-white rounded-md"
+            />
+          </div>
+        </div>
+      )}
+
       {error && (
         <div className="max-w-lg mx-auto mb-8 p-4 bg-red-300 border-2 border-black rounded-xl text-black font-bold shadow-[4px_4px_0_#000] text-center">
           {error}
@@ -154,23 +180,7 @@ export default function Encounter() {
         </h2>
       </div>
 
-      <div className="flex justify-center mt-6">
-        <div className="flex flex-col items-center">
-          <Lives lives={lives} />
-
-          <div className="bg-white border-2 border-black rounded px-3 py-1 font-bold text-black mb-2">
-            Score: {score}
-          </div>
-
-          {character && (
-            <img
-              src={getAvatarSrc(character.imageId)}
-              alt="Player Avatar"
-              className="w-24 h-24 border-4 border-black rounded-xl bg-white"
-            />
-          )}
-        </div>
-      </div>
+      <HighScores/>
 
       {lives === 0 && (
         <GameOver

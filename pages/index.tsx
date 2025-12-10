@@ -56,7 +56,6 @@ export default function Home() {
               className="
                 px-6 py-3 mt-6
                 bg-yellow-300 border-2 border-black rounded-xl 
-                shadow-[4px_4px_0_#000]
                 font-bold text-black text-lg
                 hover:bg-yellow-400 active:scale-95 transition
               "
