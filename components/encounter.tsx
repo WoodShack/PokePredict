@@ -10,15 +10,6 @@ import Lives from "./lives";
 import HighScores from "../components/highScore";
 import GameOver from "./gameOver";
 
-const correctSound =
-  typeof Audio !== "undefined" ? new Audio("/sounds/correct.mp3.wav") : null;
-
-const wrongSound =
-  typeof Audio !== "undefined" ? new Audio("/sounds/wrong.mp3.wav") : null;
-
-const gameOverSound =
-  typeof Audio !== "undefined" ? new Audio("/sounds/gameover.mp3.wav") : null;
-
 const questions: {
   text: string;
   attribute: "height" | "weight" | "attack" | "defense" | "hp";
@@ -45,6 +36,15 @@ export default function Encounter() {
   const [scoreSaved, setScoreSaved] = useState(false);
   const [highScoresReload, setHighScoresReload] = useState(0);
   const { basePath } = useRouter();
+
+  const correctSound =
+  typeof Audio !== "undefined" ? new Audio(`${basePath}/sounds/correct.mp3.wav`) : null;
+
+  const wrongSound =
+  typeof Audio !== "undefined" ? new Audio(`${basePath}/sounds/wrong.mp3.wav`) : null;
+
+  const gameOverSound =
+  typeof Audio !== "undefined" ? new Audio(`${basePath}/sounds/gameover.mp3.wav`) : null;
 
   function getAvatarSrc(imageId: 1 | 2 | 3) {
     switch (imageId) {
