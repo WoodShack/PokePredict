@@ -2,11 +2,14 @@ import Header from "../components/header";
 import { useState, useEffect } from "react";
 import { getCharacter, getHighScores } from "../components/localstorage";
 import Link from "next/link";
+import Image from "next/image";
+import { useRouter } from "next/router";
 
 export default function Home() {
   const [name, setName] = useState("");
   const [avatar, setAvatar] = useState("");
   const [lastScore, setLastScore] = useState<number | null>(null);
+  const { basePath } = useRouter();
 
   useEffect(() => {
     const saved = getCharacter();
@@ -15,9 +18,9 @@ export default function Home() {
     setName(saved.name);
 
     const avatarMap: Record<number, string> = {
-      1: "/avatar1.png",
-      2: "/avatar2.png",
-      3: "/avatar3.png",
+      1: `${basePath}/avatar1.png`,
+      2: `${basePath}/avatar2.png`,
+      3: `${basePath}/avatar3.png`,
     };
 
     setAvatar(avatarMap[saved.imageId]);
@@ -77,9 +80,11 @@ export default function Home() {
             </p>
 
             {avatar && (
-              <img
+              <Image
                 src={avatar}
                 alt="Trainer Avatar"
+                width={100}
+                height={100}
                 className="mx-auto mt-6 w-40 h-40 rounded-xl border-4 border-black"
               />
             )}

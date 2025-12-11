@@ -1,8 +1,11 @@
 import { useState, useEffect } from "react";
 import { getCharacter, Character } from "../components/localstorage";
+import Image from "next/image";
+import { useRouter } from "next/router";
 
 export default function EncounterCharacter() {
   const [character, setCharacter] = useState<Character | null>(null);
+  const { basePath } = useRouter();
 
   useEffect(() => {
     const savedCharacter = getCharacter();
@@ -13,10 +16,10 @@ export default function EncounterCharacter() {
 
   const avatarSrc =
     character.imageId === 1
-      ? "/avatar1.png"
+      ? `${basePath}/avatar1.png`
       : character.imageId === 2
-      ? "/avatar2.png"
-      : "/avatar3.png";
+      ? `${basePath}/avatar2.png`
+      : `${basePath}/avatar3.png`;
 
   return (
     <div style={{ textAlign: "center", marginTop: "20px" }}>
