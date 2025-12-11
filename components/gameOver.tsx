@@ -2,10 +2,11 @@ import HighScores from "./highScore";
 
 type GameOverProps = {
   score: number;
+  reloadTrigger?: number;
   onRestart: () => void;
 };
 
-export default function GameOver({ score, onRestart }: GameOverProps) {
+export default function GameOver({ reloadTrigger, score, onRestart }: GameOverProps) {
   return (
     <div className="fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center z-50 p-4">
       <div className="bg-yellow-500 border-4 border-black rounded-3xl p-8 text-center max-w-lg w-full shadow-2xl">
@@ -16,7 +17,7 @@ export default function GameOver({ score, onRestart }: GameOverProps) {
         <div className="w-24 h-1 bg-black mx-auto mb-6 rounded-full"></div>
 
         <div className="mb-8">
-          <HighScores />
+          <HighScores reloadTrigger={reloadTrigger} />
         </div>
 
         <button

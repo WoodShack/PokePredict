@@ -192,6 +192,7 @@ export default function Encounter() {
       {lives === 0 && (
         <GameOver
           score={score}
+          reloadTrigger={highScoresReload}
           onRestart={() => {
             setLives(5);
             setScore(0);
