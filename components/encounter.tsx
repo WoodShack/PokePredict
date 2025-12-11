@@ -4,6 +4,8 @@ import type { Pokemon } from "./pokeapi";
 import { getTwoRandomPokemon } from "./pokeapi";
 import { getCharacter, addHighScore } from "./localstorage";
 import type { Character } from "./localstorage";
+import { useRouter } from "next/router";
+import Image from "next/image";
 import Lives from "./lives";
 import HighScores from "../components/highScore";
 import GameOver from "./gameOver";
@@ -41,15 +43,16 @@ export default function Encounter() {
   const [lives, setLives] = useState(5);
   const [score, setScore] = useState(0);
   const [scoreSaved, setScoreSaved] = useState(false);
+  const { basePath } = useRouter();
 
   function getAvatarSrc(imageId: 1 | 2 | 3) {
     switch (imageId) {
       case 1:
-        return "/avatar1.png";
+        return `${basePath}/avatar1.png`;
       case 2:
-        return "/avatar2.png";
+        return `${basePath}/avatar2.png`;
       case 3:
-        return "/avatar3.png";
+        return `${basePath}/avatar3.png`;
     }
   }
 
@@ -140,8 +143,10 @@ export default function Encounter() {
               SCORE: {score}
             </div>
 
-            <img
+            <Image
               src={getAvatarSrc(character.imageId)}
+              width={20}
+              height={20}
               alt="Player Avatar"
               className="w-20 h-20 border-4 border-black bg-white rounded-md"
             />

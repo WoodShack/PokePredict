@@ -25,7 +25,7 @@ export default function EncounterCharacter() {
     <div style={{ textAlign: "center", marginTop: "20px" }}>
       <h2>Your Character</h2>
       <p>Name: {character.name}</p>
-      <img src={avatarSrc} alt="Trainer Avatar" style={{ display: "block", margin: "20px auto" }}/>
+      <Image src={avatarSrc} alt="Trainer Avatar" width={50} height={50} style={{ display: "block", margin: "20px auto" }}/>
     </div>
   );
 }
