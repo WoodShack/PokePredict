@@ -1,6 +1,7 @@
 import Header from "../components/header";
 import { useState, useEffect } from "react";
 import { getCharacter, getHighScores } from "../components/localstorage";
+import Link from "next/link";
 
 export default function Home() {
   const [name, setName] = useState("");
@@ -51,7 +52,7 @@ export default function Home() {
             name and choose an avatar to personalize your journey!
           </p>
 
-          <a href="/characterCreation">
+          <Link href="/characterCreation">
             <button
               className="
                 px-6 py-3 mt-6
@@ -62,7 +63,7 @@ export default function Home() {
             >
               Create Character
             </button>
-          </a>
+          </Link>
         </div>
 
         {name && (

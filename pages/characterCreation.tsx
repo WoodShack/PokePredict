@@ -2,10 +2,12 @@ import Header from "../components/header";
 import { useState } from "react";
 import { useRouter } from "next/router";
 import { saveCharacter } from "../components/localstorage";
+import Image from "next/image";
 
 export default function CharacterCreation() {
   const [name, setName] = useState("");
   const router = useRouter();
+  const { basePath } = useRouter();
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -72,10 +74,11 @@ export default function CharacterCreation() {
               required
               className="mb-2"
             />
-            <img
-              src="/avatar1.png"
+            <Image
+              src={`${basePath}/avatar1.png`}
               alt="Trainer 1"
               width={100}
+              height={100}
               className="rounded-lg text-black border-2 border-black"
             />
           </label>
@@ -95,10 +98,11 @@ export default function CharacterCreation() {
               required
               className="mb-2"
             />
-            <img
-              src="/avatar2.png"
+            <Image
+              src={`${basePath}/avatar2.png`}
               alt="Trainer 2"
               width={100}
+              height={100}
               className="rounded-lg text-black border-2 border-black"
             />
           </label>
@@ -118,10 +122,11 @@ export default function CharacterCreation() {
               required
               className="mb-2"
             />
-            <img
-              src="/avatar3.png"
+            <Image
+              src={`${basePath}/avatar3.png`}
               alt="Trainer 3"
               width={100}
+              height={100}
               className="rounded-lg text-black border-2 border-black"
             />
           </label>
