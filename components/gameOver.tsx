@@ -15,16 +15,13 @@ export default function GameOver({ onRestart }: GameOverProps) {
         <div className="w-24 h-1 bg-black mx-auto mb-6 rounded-full"></div>
 
         <div className="mb-8">
-          <h3 className="text-xl font-bold text-black mb-3 underline">
-            High Scores
-          </h3>
           <HighScores />
         </div>
 
         <button
           onClick={onRestart}
           className="px-7 py-3 bg-red-500 border-2 border-black rounded-xl 
-                     font-bold text-black text-lg shadow-[3px_3px_0px_black]
+                     font-bold text-black text-lg
                      hover:bg-red-600 active:scale-95 active:shadow-none transition-all"
         >
           Restart Game
