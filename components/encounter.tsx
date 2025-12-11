@@ -43,6 +43,7 @@ export default function Encounter() {
   const [lives, setLives] = useState(5);
   const [score, setScore] = useState(0);
   const [scoreSaved, setScoreSaved] = useState(false);
+  const [highScoresReload, setHighScoresReload] = useState(0);
   const { basePath } = useRouter();
 
   function getAvatarSrc(imageId: 1 | 2 | 3) {
@@ -118,6 +119,7 @@ export default function Encounter() {
       gameOverSound?.play();
       addHighScore(character, score);
       setScoreSaved(true);
+      setHighScoresReload((n) => n + 1);
     }
   }, [lives, character, score, scoreSaved]);
 
@@ -185,7 +187,7 @@ export default function Encounter() {
         </h2>
       </div>
 
-      <HighScores/>
+      <HighScores reloadTrigger={highScoresReload} />
 
       {lives === 0 && (
         <GameOver
